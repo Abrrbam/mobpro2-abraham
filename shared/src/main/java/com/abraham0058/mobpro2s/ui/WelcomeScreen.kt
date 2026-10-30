@@ -1,6 +1,8 @@
 package com.abraham0058.mobpro2s.ui
 
+import android.content.Intent
 import android.graphics.drawable.AdaptiveIconDrawable
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,6 +30,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.abraham0058.mobpro2s.R
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 
 @Composable
 private fun adaptiveIconPainterResource(id: Int): Painter {
@@ -43,12 +47,25 @@ private fun adaptiveIconPainterResource(id: Int): Painter {
     }
 }
 
+private fun getSigninIntent(): Intent {
+    return AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(
+            arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
+        )
+        .build()
+}
+
 @Composable
 fun WelcomeScreen(
     appLogo: Int,
     appName: Int,
     modifier: Modifier = Modifier,
 ) {
+
+    val contract = FirebaseAuthUIActivityResultContract()
+    val launcher = rememberLauncherForActivityResult(contract) { }
+
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -72,7 +89,7 @@ fun WelcomeScreen(
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp, 72.dp, 16.dp, 16.dp)
         )
-        Button(onClick = {/*TODO */} ) {
+        Button(onClick = { launcher.launch(getSigninIntent())} ) {
             Text(text = stringResource(R.string.login))
         }
     }
