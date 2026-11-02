@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.abraham0058.mobpro2.R
+import com.abraham0058.mobpro2.ui.screen.main.MainScreen
 import com.abraham0058.mobpro2s.ui.WelcomeScreen
 
 @Composable
@@ -22,8 +23,7 @@ fun DosenApp() {
                 appName = R.string.app_name,
                 modifier = Modifier.padding(innerPadding)
             )
-
         }
     }
-
+    userFlow?.let { MainScreen(it) }
 }
