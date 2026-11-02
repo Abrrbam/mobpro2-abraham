@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.abraham0058.mobpro2m.R
+import com.abraham0058.mobpro2m.ui.screen.main.MainScreen
 import com.abraham0058.mobpro2s.ui.WelcomeScreen
 
 
@@ -25,4 +26,5 @@ fun MahasiswaApp() {
             )
         }
     }
+    userFlow?.let { MainScreen(it) }
 }
