@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +48,10 @@ fun MainScreen(
 ) {
     val viewModel: MainViewModel = viewModel()
 
+    LaunchedEffect(true) {
+        viewModel.getDataKelas()
+    }
+
     Scaffold(
         topBar = { AppBarWithLogout(R.string.app_name) }
     ) { innerPadding ->
@@ -57,11 +61,12 @@ fun MainScreen(
                 .padding(16.dp)
         ) {
             UserProfileCard(user)
-            PilihKelas(viewModel.dataKelas) {
-                Log.d("MainScreen", "Item terpilih: $it")
+            if (viewModel.dataKelas.isNotEmpty()) {
+                PilihKelas(viewModel.dataKelas) {
+                    Log.d("MainScreen", "Item terpilih: $it")
+                }
             }
         }
-
     }
 }
 
