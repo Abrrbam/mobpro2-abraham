@@ -1,6 +1,5 @@
 package com.abraham0058.mobpro2m.ui.screen.main
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -63,7 +62,7 @@ fun MainScreen(
             UserProfileCard(user)
             if (viewModel.dataKelas.isNotEmpty()) {
                 PilihKelas(viewModel.dataKelas) {
-                    Log.d("MainScreen", "Item terpilih: $it")
+                    viewModel.simpanData(it, user)
                 }
             }
         }

@@ -3,8 +3,10 @@ package com.abraham0058.mobpro2m.ui.screen.main
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.abraham0058.mobpro2s.model.Kelas
+import com.abraham0058.mobpro2s.model.Mahasiswa
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
 
@@ -35,4 +37,22 @@ class MainViewModel: ViewModel() {
         }
     }
 
+    fun simpanData(kelasIndex: Int, user: FirebaseUser) {
+        val kelasId = dataKelasId[kelasIndex]
+
+        db.runBatch {
+            // menulis data ke collection Mahasiswa
+            db.collection(Mahasiswa.COLLECTION)
+                .document(user.uid)
+                .set(mapOf(Mahasiswa.KELAS_ID to kelasId))
+
+            // menulis data Mahasiswa ke sub-collection Mahasiswa
+            // yang berada di dalam Document Kelas
+            db.collection(Kelas.COLLECTION)
+                .document(kelasId)
+                .collection(Mahasiswa.COLLECTION)
+                .document(user.uid)
+                .set(Mahasiswa(user))
+        }
+    }
 }
