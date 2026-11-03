@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.abraham0058.mobpro2s.R
 import com.abraham0058.mobpro2s.ui.AppBarWithLogout
 import com.abraham0058.mobpro2s.ui.UserProfileCard
@@ -24,6 +25,10 @@ import com.google.firebase.auth.FirebaseUser
 fun MainScreen(
     user: FirebaseUser
 ) {
+    //pakai uid user yg login
+    val factory = ViewModelFactory(user.uid)
+    val viewModel: MainViewModel = viewModel(factory = factory)
+
     var showDialog by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -48,6 +53,8 @@ fun MainScreen(
 
         if (showDialog) {
             KelasDialog(onDismissRequest = { showDialog = false}) {
+                //menambahkan nama kelas
+                viewModel.insert(it)
                 showDialog = false
             }
 
