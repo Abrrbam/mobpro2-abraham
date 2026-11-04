@@ -1,6 +1,5 @@
 package com.abraham0058.mobpro2.ui.screen.main
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +23,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.abraham0058.mobpro2.navigation.Screen
 import com.abraham0058.mobpro2s.R
 import com.abraham0058.mobpro2s.model.Kelas
 import com.abraham0058.mobpro2s.ui.AppBarWithLogout
@@ -32,6 +33,7 @@ import com.google.firebase.auth.FirebaseUser
 
 @Composable
 fun MainScreen(
+    navController: NavHostController,
     user: FirebaseUser
 ) {
     //pakai uid user yg login
@@ -57,7 +59,11 @@ fun MainScreen(
             data = viewModel.data,
             modifier = Modifier.padding(innerPadding)
         ) {
-            Log.d("MainScreen", "ID kelas: ${viewModel.dataId[it]}")
+            val route = Screen.Detail.withData(
+                viewModel.dataId[it],
+                viewModel.data[it].nama
+            )
+            navController.navigate(route)
         }
         if (showDialog) {
             KelasDialog(onDismissRequest = { showDialog = false}) {
