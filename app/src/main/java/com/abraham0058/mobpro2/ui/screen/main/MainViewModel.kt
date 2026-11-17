@@ -13,7 +13,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 
-class MainViewModel(private val uid: String): ViewModel() {
+class MainViewModel(private val uid: String) : ViewModel() {
 
     private val db = Firebase.firestore
 
@@ -44,6 +44,7 @@ class MainViewModel(private val uid: String): ViewModel() {
                 dataId.add(change.newIndex, change.document.id)
                 data.add(change.newIndex, kelas)
             }
+
             DocumentChange.Type.MODIFIED -> {
                 val kelas = change.document.toObject<Kelas>()
                 if (change.oldIndex == change.newIndex) {
@@ -55,6 +56,7 @@ class MainViewModel(private val uid: String): ViewModel() {
                     data.add(change.newIndex, kelas)
                 }
             }
+
             DocumentChange.Type.REMOVED -> {
                 dataId.removeAt(change.oldIndex)
                 data.removeAt(change.oldIndex)

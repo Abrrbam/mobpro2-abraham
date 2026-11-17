@@ -23,7 +23,9 @@ import com.google.firebase.auth.FirebaseUser
 
 @Composable
 fun UserProfileCard(
-    user: FirebaseUser,
+    name: String,
+    email: String,
+    photoUrl: String?,
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(
@@ -35,7 +37,7 @@ fun UserProfileCard(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(user.photoUrl)
+                    .data(photoUrl)
                     .crossfade(true)
                     .build(),
                 contentDescription = null,
@@ -45,18 +47,31 @@ fun UserProfileCard(
                 modifier = Modifier.padding(start = 16.dp)
             ) {
                 Text(
-                    text = user.displayName.toString(),
+                    text = name,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = user.email.toString(),
+                    text = email,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
         }
     }
+}
+
+@Composable
+fun UserProfileCard(
+    user: FirebaseUser,
+    modifier: Modifier = Modifier
+) {
+    UserProfileCard(
+        name = user.displayName.toString(),
+        email = user.email.toString(),
+        photoUrl = user.photoUrl?.toString(),
+        modifier = modifier
+    )
 }

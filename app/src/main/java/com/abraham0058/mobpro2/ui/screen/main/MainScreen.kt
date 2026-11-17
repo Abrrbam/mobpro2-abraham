@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.abraham0058.mobpro2.navigation.Screen
-import com.abraham0058.mobpro2.ui.screen.detail.DetailScreenContent
+import com.abraham0058.mobpro2.ui.screen.detail.DetailPane
 import com.abraham0058.mobpro2s.R
 import com.abraham0058.mobpro2s.model.Kelas
 import com.abraham0058.mobpro2s.ui.AppBarWithLogout
@@ -101,7 +101,7 @@ fun MainScreen(
                 }
 
                 selectedId?.let {
-                    DetailScreenContent(it, Modifier.weight(1f))
+                    DetailPane(kelasId = it, Modifier.weight(1f))
                 }
             }
         }
