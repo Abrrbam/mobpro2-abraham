@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.abraham0058.mobpro2m.R
+import com.abraham0058.mobpro2m.notify.createChannel
 import com.abraham0058.mobpro2s.ui.AppBarWithLogout
 import com.abraham0058.mobpro2s.ui.UserProfileCard
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -52,6 +54,7 @@ import com.google.firebase.auth.FirebaseUser
 fun MainScreen(
     user: FirebaseUser
 ) {
+    val context = LocalContext.current
     val viewModel: MainViewModel = viewModel()
 
     val notifyPermissionState: PermissionState? =
@@ -73,6 +76,7 @@ fun MainScreen(
         if (viewModel.kelasId == null) {
             viewModel.getDataKelas()
         }
+        createChannel(context)
     }
 
     Scaffold(
