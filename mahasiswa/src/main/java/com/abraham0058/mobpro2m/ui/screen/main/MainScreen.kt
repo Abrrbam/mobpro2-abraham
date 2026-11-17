@@ -1,5 +1,7 @@
 package com.abraham0058.mobpro2m.ui.screen.main
 
+import android.Manifest
+import android.os.Build
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -39,17 +41,32 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.abraham0058.mobpro2m.R
 import com.abraham0058.mobpro2s.ui.AppBarWithLogout
 import com.abraham0058.mobpro2s.ui.UserProfileCard
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.google.firebase.auth.FirebaseUser
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MainScreen(
     user: FirebaseUser
 ) {
     val viewModel: MainViewModel = viewModel()
 
+    val notifyPermissionState: PermissionState? =
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) null
+        else rememberPermissionState(Manifest.permission.POST_NOTIFICATIONS)
+
+
     LaunchedEffect(true) {
         // get kelas(kelasId) dari mahasiswa yg sudah pilih kelas
         viewModel.getKelasMahasiswa(user.uid)
+
+        if (notifyPermissionState != null &&
+            !notifyPermissionState.status.isGranted) {
+            notifyPermissionState.launchPermissionRequest()
+        }
     }
 
     LaunchedEffect(viewModel.kelasId) {
