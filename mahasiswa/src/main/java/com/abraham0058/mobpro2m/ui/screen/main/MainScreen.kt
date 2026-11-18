@@ -65,18 +65,19 @@ fun MainScreen(
     LaunchedEffect(true) {
         // get kelas(kelasId) dari mahasiswa yg sudah pilih kelas
         viewModel.getKelasMahasiswa(user.uid)
+        viewModel.getFcmToken()
 
         if (notifyPermissionState != null &&
             !notifyPermissionState.status.isGranted) {
             notifyPermissionState.launchPermissionRequest()
         }
+        createChannel(context)
     }
 
     LaunchedEffect(viewModel.kelasId) {
         if (viewModel.kelasId == null) {
             viewModel.getDataKelas()
         }
-        createChannel(context)
     }
 
     Scaffold(

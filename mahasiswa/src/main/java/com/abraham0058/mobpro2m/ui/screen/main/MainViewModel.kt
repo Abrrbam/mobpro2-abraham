@@ -1,5 +1,6 @@
 package com.abraham0058.mobpro2m.ui.screen.main
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -12,6 +13,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
+import com.google.firebase.messaging.messaging
 
 class MainViewModel: ViewModel() {
 
@@ -22,6 +24,14 @@ class MainViewModel: ViewModel() {
 
     private val dataKelasId = mutableStateListOf<String>()
     val dataKelas = mutableStateListOf<String>()
+
+    fun getFcmToken() {
+        Firebase.messaging.token.addOnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d("FCM", "Token saat ini: ${it.result}")
+            }
+        }
+    }
 
     fun getKelasMahasiswa(uid: String) {
         db.collection(Mahasiswa.COLLECTION)
