@@ -21,3 +21,6 @@ Telkom University
 Repository ini dibuat semata-mata untuk tujuan pembelajaran pribadi dan dokumentasi proses belajar. Seluruh materi, modul, dan konten pembelajaran yang digunakan sebagai referensi tetap merupakan hak milik pemilik resminya, yaitu **Indra Azimi, S.T., M.T.**
 
 Pemilik repository tidak mengklaim kepemilikan atas materi pembelajaran yang direferensikan. Jika terdapat materi yang dianggap tidak sesuai untuk dipublikasikan atau memerlukan penyesuaian terkait hak cipta dan penggunaan akademik, repository ini akan diperbarui sesuai ketentuan yang berlaku.
+
+[//]: # (<img alt="Implement testing with Firebase. Test Lab will fully shutdown on 30 September 2027. Migrate to Developer Device Platform." src="C:\Users\Abraham Putra\Pictures\Screenshots\Screenshot 2026-11-19 212402.png" title="Firebase Test Lab"/>)
+![Screenshot 2026-11-19 212402.png](../../Pictures/Screenshots/Screenshot%202026-11-19%20212402.png)
