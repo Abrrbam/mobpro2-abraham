@@ -1,26 +1,23 @@
-# Modul Pemrograman Untuk Perangkat Bergerak 2
+This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
 
-Repository ini berisi materi dan modul pembelajaran yang digunakan pada mata kuliah **Pemrograman Untuk Perangkat Bergerak 2**.
+* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
+  It contains several subfolders:
+  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
+  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
+    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
+    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
+    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
+    folder is the appropriate location.
 
-## Tentang Repository
+### Running the apps
 
-Repository ini dibuat sebagai sarana dokumentasi dan pembelajaran pribadi berdasarkan modul perkuliahan yang digunakan pada Program Studi **D3 Rekayasa Perangkat Lunak Aplikasi (D3 RPLA)**, **Telkom University**.
+Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
 
-Karena sedang menjalani program **magang selama dua semester**, pemilik repository tidak dapat mengikuti seluruh kegiatan perkuliahan secara langsung. Oleh karena itu, repository ini digunakan sebagai media untuk mempelajari materi secara mandiri, mendokumentasikan hasil pembelajaran, serta menyimpan catatan dan latihan yang berkaitan dengan mata kuliah tersebut.
+- Android app: `./gradlew :androidApp:assembleDebug`
+- Desktop app:
+  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
+  - Standard run: `./gradlew :desktopApp:run`
 
-## Kepemilikan Modul
+---
 
-Pemilik resmi dan pihak yang berkepentingan atas materi, modul, serta konten pembelajaran yang menjadi referensi dalam repository ini adalah:
-
-**Indra Azimi, S.T., M.T.**  
-Dosen Program Studi D3 Rekayasa Perangkat Lunak Aplikasi (D3 RPLA)  
-Telkom University
-
-## Disclaimer
-
-Repository ini dibuat semata-mata untuk tujuan pembelajaran pribadi dan dokumentasi proses belajar. Seluruh materi, modul, dan konten pembelajaran yang digunakan sebagai referensi tetap merupakan hak milik pemilik resminya, yaitu **Indra Azimi, S.T., M.T.**
-
-Pemilik repository tidak mengklaim kepemilikan atas materi pembelajaran yang direferensikan. Jika terdapat materi yang dianggap tidak sesuai untuk dipublikasikan atau memerlukan penyesuaian terkait hak cipta dan penggunaan akademik, repository ini akan diperbarui sesuai ketentuan yang berlaku.
-
-[//]: # (<img alt="Implement testing with Firebase. Test Lab will fully shutdown on 30 September 2027. Migrate to Developer Device Platform." src="C:\Users\Abraham Putra\Pictures\Screenshots\Screenshot 2026-11-19 212402.png" title="Firebase Test Lab"/>)
-![Screenshot 2026-11-19 212402.png](../../Pictures/Screenshots/Screenshot%202026-11-19%20212402.png)
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
